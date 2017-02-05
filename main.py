@@ -27,6 +27,12 @@ def home():
 	add_user = ("INSERT INTO user (driveid,drivetype,name) VALUES (%(driveid)s, %(drivetype)s, %(name)s)")
 	cursor.execute(add_user, userdata)
 
+	r=requests.get("https://api.onedrive.com/v1.0/drive/root:/share:/children",
+		headers = {'Content-Type': 'application/json'},
+		params={'access_token':token})
+	rstr= str(r.text)
+	rjson=json.loads(rstr)
+	
 	db.commit()
 	cursor.close()
 	db.close()
