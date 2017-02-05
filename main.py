@@ -10,7 +10,7 @@ db_config=dbconnect().db_config()
 def login():
     return render_template('index.html')
 
-@app.route("/take")
+@app.route("/login")
 def home():
 	r=requests.get("https://api.onedrive.com/v1.0/drive",
 		headers = {'Content-Type': 'application/json'},
@@ -45,7 +45,9 @@ def home():
 	db.commit()
 	cursor.close()
 	db.close()
-	return r.text
+	return render_template('home.html')
+
+
 	
 
 if __name__ == "__main__":
