@@ -32,7 +32,16 @@ def home():
 		params={'access_token':token})
 	rstr= str(r.text)
 	rjson=json.loads(rstr)
-	
+	length=len(rjson['value'])
+	for i in range(0,length):
+		filedata={
+			'driveid': rjson['value'][i]['createdBy']['user']['id'],
+			'id':rjson['value'][i]['id'],
+			'filename':rjson['value'][i]['name'],
+			'size': rjson['value'][i]['size']
+		}
+		add_files = ("INSERT INTO files (driveid,id,filename,size) VALUES (%(driveid)s, %(id)s, %(filename)s, %(size)s)")
+		cursor.execute(add_files, filedata)
 	db.commit()
 	cursor.close()
 	db.close()
