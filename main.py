@@ -1,8 +1,10 @@
 from flask import Flask, flash, redirect, render_template, request, session, abort
 import json, requests 
-from config import accesstoken
+import mysql.connector
+from config import accesstoken,dbconnect
 app = Flask(__name__)
 token=accesstoken().assign_token()
+db_config=dbconnect().db_config()
 
 @app.route("/")
 def login():
@@ -15,6 +17,21 @@ def home():
 		params={'access_token':token})
 	rstr= str(r.text)
 	rjson=json.loads(rstr)
-	return rjson['id']
+	userdata = {
+	    'driveid': rjson['id'],
+  		'drivetype': rjson['driveType'],
+  		'name': rjson['owner']['user']['displayName']
+	}
+	db = mysql.connector.connect(host=db_config['host'],database=db_config['database'],user=db_config['user'],password=db_config['password'])
+	cursor = db.cursor()
+	add_user = ("INSERT INTO user (driveid,drivetype,name) VALUES (%(driveid)s, %(drivetype)s, %(name)s)")
+	cursor.execute(add_user, userdata)
+
+	db.commit()
+	cursor.close()
+	db.close()
+	return r.text
+	
+
 if __name__ == "__main__":
     app.run(debug=True)
