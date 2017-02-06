@@ -28,28 +28,16 @@
 			</header>
 			<div class="main">
 				<ul id="og-grid" class="og-grid">
-					<li>
-						<a href="http://cargocollective.com/jaimemartinez/" data-largesrc="/static/images/1.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
+					{% for d in data %}
+
+						<li>
+							<a href="{{d.4}}" data-largesrc="/static/images/1.jpg" data-title={{d.2}} data-description={{d.3}}>
 							<img src="/static/images/thumbs/1.jpg" alt="img01"/>
-						</a>
-					</li>
-					<li>
-						<a href="http://cargocollective.com/jaimemartinez/" data-largesrc="/static/images/2.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
-							<img src="/static/images/thumbs/2.jpg" alt="img02"/>
-						</a>
-					</li>
-					<li>
-						<a href="http://cargocollective.com/jaimemartinez/" data-largesrc="/static/images/3.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
-							<img src="/static/images/thumbs/3.jpg" alt="img03"/>
-						</a>
-					</li>
-					<li>
-						<a href="http://cargocollective.com/jaimemartinez/" data-largesrc="/static/images/1.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
-							<img src="/static/images/thumbs/1.jpg" alt="img01"/>
-						</a>
-					</li>
+							</a>
+						</li>
+					{% endfor %}	
 				</ul>
-				<p>Copyright © 2017   <a href="https://github.com/deepak98">Deepak Verma</a></p>
+				<p>Copyright © 2017 &nbsp;&nbsp;&nbsp;<a href="https://github.com/deepak98">WeTransfer</a></p>
 				<a id="og-additems" href="#">add more</a>
 			</div>
 		</div><!-- /container -->
