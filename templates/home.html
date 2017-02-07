@@ -17,28 +17,27 @@
 		<div class="container">	
 			<!-- Codrops top bar -->
 			<div class="codrops-top clearfix">
-				<a href="http://tympanus.net/Tutorials/HexaFlip/"><strong>&laquo; Previous Demo: </strong>HexaFlip</a>
+				<a href="."><strong>&laquo; Back to the Home Page </strong></a>
 				<span class="right">
-					<a href="http://cargocollective.com/jaimemartinez">Illustrations by Jaime Martinez</a>
-					<a href="http://tympanus.net/codrops/?p=14530"><strong>Back to the Codrops Article</strong></a>
+					<a href=".">WeTransfer</a>
 				</span>
 			</div><!--/ Codrops top bar -->
 			<header class="clearfix">
-				<h1>Thumbnail Grid <span>with Expanding Preview</span></h1>	
+				<h1>View Files <span>Download Files</span></h1>	
 			</header>
 			<div class="main">
 				<ul id="og-grid" class="og-grid">
 					{% for d in data %}
 
 						<li>
-							<a href="{{d.4}}" data-largesrc="/static/images/1.jpg" data-title={{d.2}} data-description={{d.3}}>
-							<img src="/static/images/thumbs/1.jpg" alt="img01"/>
+							<a href="{{d.4}}" data-largesrc="{{d.5}}" data-title={{d.2}} data-description={{d.3}}>
+							<img src="{{d.5}}" alt="img01"/>
 							</a>
 						</li>
 					{% endfor %}	
 				</ul>
-				<p>Copyright © 2017 &nbsp;&nbsp;&nbsp;<a href="https://github.com/deepak98">WeTransfer</a></p>
-				<a id="og-additems" href="#">add more</a>
+				<p><strong>Copyright © 2017 &nbsp;&nbsp;&nbsp;<a href="https://github.com/deepak98">WeTransfer</a></strong></p>
+				
 			</div>
 		</div><!-- /container -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

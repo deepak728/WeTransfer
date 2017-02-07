@@ -40,24 +40,27 @@ def login():
 	rjson=json.loads(rstr)
 	length=len(rjson['value'])
 	for i in range(0,length):
-		re=requests.get("https://api.onedrive.com/v1.0/drive/items/"+rjson['value'][i]['id']+"/children?select=id,name&expand=thumbnails(select=large)",
-		headers = {'Content-Type': 'application/json'},
+		re=requests.get("https://api.onedrive.com/v1.0/drive/items/"+rjson['value'][i]['id']+"/thumbnails/0/large",
+		headers = {'Content-Type': 'application/json'},	
 		params={'access_token':token})
-		print(re.text)	
+		restr= str(re.text)
+		rejson=json.loads(restr)
 		filedata={
 			'driveid': rjson['value'][i]['createdBy']['user']['id'],
 			'id':rjson['value'][i]['id'],
 			'filename':rjson['value'][i]['name'],
 			'size': 'Size:' + str(rjson['value'][i]['size']/1024)+'MB',
-			'downloadurl':rjson['value'][i]['@content.downloadUrl']
+			'downloadurl':rjson['value'][i]['@content.downloadUrl'],
+			'thumbnail':rejson['url']
 		}
 
-		add_files = ("INSERT INTO files (driveid,id,filename,size,downloadurl) VALUES (%(driveid)s, %(id)s, %(filename)s, %(size)s,%(downloadurl)s)")
+		add_files = ("INSERT INTO files (driveid,id,filename,size,downloadurl,thumbnail) VALUES (%(driveid)s, %(id)s, %(filename)s, %(size)s,%(downloadurl)s,%(thumbnail)s)")
 		cursor.execute(add_files, filedata)
 	db.commit()
 	cursor.execute("SELECT * FROM files")
 	data = cursor.fetchall()
 	return render_template('home.html',data=data)
+	
 	
 @app.route("/home")
 def home():
