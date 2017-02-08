@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-		<title>Thumbnail Grid with Expanding Preview</title>
+		<title>WeTransfer</title>
 		<meta name="description" content="Thumbnail Grid with Expanding Preview" />
 		<meta name="keywords" content="thumbnails, grid, preview, google image search, jquery, image grid, expanding, preview, portfolio" />
 		<meta name="author" content="Codrops" />
@@ -30,13 +30,13 @@
 					{% for d in data %}
 
 						<li>
-							<a href="{{d.4}}" data-largesrc="{{d.5}}" data-title={{d.2}} data-description={{d.3}}>
+							<a href="{{d.4}}" data-largesrc="{{d.5}}" data-title={{d.2}} data-description={{d.3}}.....TAG:{{d.6}}>
 							<img src="{{d.5}}" alt="img01"/>
 							</a>
 						</li>
 					{% endfor %}	
 				</ul>
-				<p><strong>Copyright © 2017 &nbsp;&nbsp;&nbsp;<a href="https://github.com/deepak98">WeTransfer</a></strong></p>
+				<p id="footer"><strong>Copyright © 2017 &nbsp;&nbsp;&nbsp;<a href="https://github.com/deepak98">WeTransfer</a></strong></p>
 				
 			</div>
 		</div><!-- /container -->
