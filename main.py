@@ -1,9 +1,11 @@
-from flask import Flask, flash, redirect, render_template, request, session, abort
+from flask import Flask, redirect, render_template, request, session, abort
 import json, requests 
 import mysql.connector
 from config import dbconnect
 import os
+
 app = Flask(__name__)
+
 db_config=dbconnect().db_config()
 
 @app.route("/")
@@ -22,6 +24,7 @@ def login():
 	cursor.execute("SELECT driveid FROM user")
 	data = cursor.fetchall()
 
+
 	r=requests.get("https://api.onedrive.com/v1.0/drive",
 		headers = {'Content-Type': 'application/json'},
 		params={'access_token':token})
@@ -31,14 +34,15 @@ def login():
 	userdata = {
 	    'driveid': rjson['id'],
   		'drivetype': rjson['driveType'],
-  		'name': rjson['owner']['user']['displayName']
-  		
+  		'name': rjson['owner']['user']['displayName']  		
 	}
 	
 	p=0
 	for id in data:
 		if id[0]==userdata['driveid']:
 			p=1
+
+
 	if p==0:		
 		db = mysql.connector.connect(host=db_config['host'],database=db_config['database'],user=db_config['user'],password=db_config['password'])
 		cursor = db.cursor()
@@ -98,6 +102,8 @@ def login():
 		data = cursor.fetchall()
 		return render_template('home.html',data=data)
 
+
+
 def User_Favourite(id):
 	db = mysql.connector.connect(host=db_config['host'],database=db_config['database'],user=db_config['user'],password=db_config['password'])
 	cursor = db.cursor()
@@ -117,6 +123,7 @@ def User_Favourite(id):
 			for j in list:
 				if data[i][1]==j:
 					user_favourite_list[j]=user_favourite_list[j]+1
+
 	x=""
 	y=0
 	for key, value in user_favourite_list.iteritems():			
@@ -125,6 +132,7 @@ def User_Favourite(id):
 			x=key
 	print(x+" "+str(y))
 	return x
+
 
 
 if __name__ == "__main__":
